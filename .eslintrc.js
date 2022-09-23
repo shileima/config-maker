@@ -37,7 +37,11 @@ module.exports = {
     'space-before-function-paren': ['error', 'always']
   },
   parserOptions: {
-    parser: 'babel-eslint'
+    parser: 'babel-eslint',
+    ecmaFeatures: {
+      // 支持装饰器
+      legacyDecorators: true
+    }
   },
   globals: {
     location: false

@@ -55,7 +55,7 @@ function buildFormTemplate (scheme, child, type) {
 function buildFromBtns (scheme, type) {
   let str = ''
   if (scheme.formBtns && type === 'file') {
-    str = `<el-form-item size="large">
+    str = `<el-form-item size="small">
           <el-button type="primary" @click="submitForm">提交</el-button>
           <el-button @click="resetForm">重置</el-button>
         </el-form-item>`
