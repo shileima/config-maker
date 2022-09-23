@@ -1,8 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '@/views/index/Home.vue'
-import Dialog from '@/example/dialog.vue'
-import Page from '@/example/page.vue'
+import UploadImage from '@/views/example/decrator.vue'
 
 Vue.use(VueRouter)
 
@@ -13,14 +12,9 @@ const routes = [
     component: Home
   },
   {
-    path: '/dialog',
-    name: 'dialog',
-    component: Dialog
-  },
-  {
     path: '/page',
     name: 'page',
-    component: Page
+    component: UploadImage
   },
   {
     path: '/parser',

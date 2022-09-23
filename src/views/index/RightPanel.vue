@@ -482,9 +482,9 @@
           <el-form-item
             v-if="activeData.size !== undefined &&
               (activeData.__config__.optionType === 'button' ||
-              activeData.__config__.border ||
-              activeData.__config__.tag === 'el-color-picker' ||
-              activeData.__config__.tag === 'el-button')"
+                activeData.__config__.border ||
+                activeData.__config__.tag === 'el-color-picker' ||
+                activeData.__config__.tag === 'el-button')"
             label="组件尺寸"
           >
             <el-radio-group v-model="activeData.size">
