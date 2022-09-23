@@ -4,11 +4,11 @@
   "private": true,
   "scripts": {
     "build": "vue-cli-service build",
-    "build:report": "vue-cli-service build --report",
-    "build:render": "vue-cli-service build --target lib --name form-gen-render --dest ./src/components/render/lib/ ./src/components/render/render.js",
-    "build:parser": "vue-cli-service build --target lib --name form-gen-parser --dest ./src/components/parser/lib/ ./src/components/parser/index.js",
-    "build:tinymce": "vue-cli-service build --target lib --name form-gen-tinymce --dest ./src/components/tinymce/lib/ ./src/components/tinymce/index.js",
     "lint": "vue-cli-service lint",
+    "build:parser": "vue-cli-service build --target lib --name form-gen-parser --dest ./src/components/parser/lib/ ./src/components/parser/index.js",
+    "build:render": "vue-cli-service build --target lib --name form-gen-render --dest ./src/components/render/lib/ ./src/components/render/render.js",
+    "build:report": "vue-cli-service build --report",
+    "build:tinymce": "vue-cli-service build --target lib --name form-gen-tinymce --dest ./src/components/tinymce/lib/ ./src/components/tinymce/index.js",
     "dev": "vue-cli-service serve"
   },
   "dependencies": {
@@ -21,13 +21,17 @@
     "throttle-debounce": "^2.1.0",
     "vue": "^2.6.11",
     "vue-class-component": "^7.2.6",
-    "vuedraggable": "^2.23.2",
-    "vue-property-decorator": "^8"
+    "vue-property-decorator": "^8",
+    "vuedraggable": "^2.23.2"
   },
   "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^2.33.0",
+    "@typescript-eslint/parser": "^2.33.0",
     "@vue/cli-plugin-babel": "~4.4.0",
     "@vue/cli-plugin-eslint": "~4.4.0",
+    "@vue/cli-plugin-typescript": "~4.5.13",
     "@vue/cli-service": "~4.4.0",
+    "@vue/eslint-config-typescript": "^5.0.2",
     "babel-eslint": "^10.1.0",
     "eslint": "^6.8.0",
     "eslint-config-airbnb-base": "^14.0.0",
@@ -36,6 +40,7 @@
     "sass": "^1.23.7",
     "sass-loader": "^8.0.0",
     "svg-sprite-loader": "^4.1.6",
+    "typescript": "~4.1.5",
     "vue-template-compiler": "^2.6.11"
   },
   "homepage": ""

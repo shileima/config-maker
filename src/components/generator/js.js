@@ -264,9 +264,10 @@ function buildOptionMethod (methodName, model, methodList, scheme) {
 
 // js整体拼接
 function buildexport (conf, type, data, rules, selectOptions, uploadVar, props, methods, created) {
-  const str = `${exportDefault}{
+  const str = `import { CustomPropMixins } from '@gundam/customprop-sdk'
+  ${exportDefault}{
   ${inheritAttrs[type]}
-  mixins: [],
+  mixins: typeof(CustomPropMixins) === 'undefined' ? [] : [CustomPropMixins],
   components: {},
   props: [],
   data () {

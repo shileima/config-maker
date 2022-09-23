@@ -212,36 +212,39 @@ export default {
       try {
         const ast = parse(jsCodeStr, { sourceType: 'module' })
         const astBody = ast.program.body
-        if (astBody.length > 1) {
-          this.$confirm(
-            'js格式不能识别，仅支持修改export default的对象内容',
-            '提示',
-            {
-              type: 'warning'
-            }
-          )
-          return
-        }
-        if (astBody[0].type === 'ExportDefaultDeclaration') {
-          const postData = {
-            type: 'refreshFrame',
-            data: {
-              generateConf: this.generateConf,
-              html: editorObj.html.getValue(),
-              js: jsCodeStr.replace(exportDefault, ''),
-              css: editorObj.css.getValue(),
-              scripts: this.scripts,
-              links: this.links
-            }
-          }
+        // 这里暂时不验证 export default 开头
+        // if (astBody.length > 1) {
+        //   this.$confirm(
+        //     'js格式不能识别，仅支持修改export default的对象内容',
+        //     '提示',
+        //     {
+        //       type: 'warning'
+        //     }
+        //   )
+        //   return
+        // }
 
-          this.$refs.previewPage.contentWindow.postMessage(
-            postData,
-            location.origin
-          )
-        } else {
-          this.$message.error('请使用export default')
+        // 这里通过 jsCodeStr.split(exportDefault)[1]截取js代码
+        // if (astBody[0].type === 'ExportDefaultDeclaration') {
+        const postData = {
+          type: 'refreshFrame',
+          data: {
+            generateConf: this.generateConf,
+            html: editorObj.html.getValue(),
+            js: jsCodeStr.split(exportDefault)[1],
+            css: editorObj.css.getValue(),
+            scripts: this.scripts,
+            links: this.links
+          }
         }
+
+        this.$refs.previewPage.contentWindow.postMessage(
+          postData,
+          location.origin
+        )
+        // } else {
+        //   this.$message.error('请使用export default')
+        // }
       } catch (err) {
         this.$message.error(`js错误：${err}`)
         console.error(err)

@@ -43,7 +43,7 @@ export default class CustomPropMixins extends Vue {
      * 寻找到名称为'Customize'的父组件代理，利用父组件实现通信
      */
     private _getCustomizeProxy() {
-        let parent: any = this.$parent || this.$root;
+        let parent: any = (this as any).$parent || (this as any).$root;
         let name = (<any>parent.$options).name;
 
         while (parent && (!name || name !== 'Customize')) {

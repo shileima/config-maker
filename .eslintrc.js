@@ -1,9 +1,12 @@
 module.exports = {
   root: true,
+
   env: {
     node: true
   },
+
   extends: ['plugin:vue/recommended', 'eslint:recommended', 'airbnb-base'],
+
   rules: {
     'linebreak-style': 0,
     'no-console': 'off',
@@ -36,14 +39,22 @@ module.exports = {
     'no-restricted-globals': 0,
     'space-before-function-paren': ['error', 'always']
   },
+
   parserOptions: {
-    parser: 'babel-eslint',
+    parser: '@typescript-eslint/parser',
     ecmaFeatures: {
-      // 支持装饰器
       legacyDecorators: true
     }
   },
+
   globals: {
     location: false
-  }
+  },
+
+  'extends': [
+    'plugin:vue/recommended',
+    'eslint:recommended',
+    'airbnb-base',
+    '@vue/typescript'
+  ]
 }
