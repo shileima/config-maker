@@ -115,23 +115,3 @@ export default {
 }
 
 </script>
-<style>
-.el-switch.is-checked .el-switch__core::after {
-  left: 100%;
-  margin-left: -17px;
-}
-
-.el-switch__core:after {
-  content: '';
-  position: absolute;
-  top: 1px;
-  left: 1px;
-  border-radius: 100%;
-  -webkit-transition: all 0.3s;
-  transition: all 0.3s;
-  width: 16px;
-  height: 16px;
-  background-color: #fff;
-}
-
-</style>
