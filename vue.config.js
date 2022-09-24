@@ -21,14 +21,14 @@ module.exports = {
     : '/',
   pages: {
     index: {
-      entry: 'src/views/index/main.js',
+      entry: 'src/views/index/main.ts',
       template: 'public/index.html',
       filename: 'index.html',
       chunks: ['chunk-vendors', 'chunk-common', 'index'],
       minify
     },
     preview: {
-      entry: 'src/views/preview/main.js',
+      entry: 'src/views/preview/main.ts',
       template: 'public/preview.html',
       filename: 'preview.html',
       chunks: ['chunk-vendors', 'chunk-common', 'preview'],

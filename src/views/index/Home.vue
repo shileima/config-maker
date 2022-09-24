@@ -471,7 +471,7 @@ export default {
       this.activeData.__config__.tag = config.tag
       this.activeData.__config__.tagIcon = config.tagIcon
       this.activeData.__config__.document = config.document
-      if (typeof this.activeData.__config__.defaultValue === typeof config.defaultValue) {
+      if (typeof this.activeData?.__config__?.defaultValue === typeof config.defaultValue) {
         config.defaultValue = this.activeData.__config__.defaultValue
       }
       Object.keys(newTag).forEach(key => {

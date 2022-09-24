@@ -2,12 +2,12 @@ import { isArray } from 'util'
 import { exportDefault, titleCase, deepClone } from '@/utils/index'
 import ruleTrigger from './ruleTrigger'
 
-const units = {
+const units: any = {
   KB: '1024',
   MB: '1024 / 1024',
   GB: '1024 / 1024 / 1024'
 }
-let confGlobal
+let confGlobal: any
 const inheritAttrs = {
   file: '',
   dialog: 'inheritAttrs: false,'
@@ -289,13 +289,19 @@ function buildexport (conf, type, data, rules, selectOptions, uploadVar, props, 
       handler(newName, oldName) {
         console.log('watch----')
         console.log(newName, oldName)
-        this.content.value = { ...this.formData }
+        if(this.content){
+          this.content.value = {
+            ...this.formData
+          }
+        }
       },
-      deep: true,
+      deep: true
     },
   },
   created () {
-    this.formData = { ...this.propInfo.defaultValue, ...this.content.value }
+    if(this.propInfo && this.content){
+      this.formData = { ...this.propInfo.defaultValue, ...this.content.value }
+    }
     ${created}
   },
   mounted () {},
