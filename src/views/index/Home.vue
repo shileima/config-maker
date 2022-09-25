@@ -3,11 +3,11 @@
     <div class="left-board">
       <div class="logo-wrapper">
         <div class="logo">
-          <!-- <img :src="logo" alt="logo" /> Form Generator -->
-          Custom Config Maker
+          <!-- <img :src="logo" alt="logo" /> Config Maker -->
+          Config Maker
           <a
             class="github"
-            href="https://github.com/JakHuang/form-generator"
+            href="https://github.com/shileima/config-maker.git"
             target="_blank"
           >
             <!-- <img
