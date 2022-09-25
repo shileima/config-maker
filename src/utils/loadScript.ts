@@ -1,4 +1,4 @@
-const callbacks = {}
+const callbacks: any = {}
 
 /**
  * 加载一个远程脚本
@@ -10,7 +10,7 @@ function loadScript (src, callback) {
   const cb = callback || (() => {})
   if (!existingScript) {
     callbacks[src] = []
-    const $script = document.createElement('script')
+    const $script: any = document.createElement('script')
     $script.src = src
     $script.id = src
     $script.async = 1

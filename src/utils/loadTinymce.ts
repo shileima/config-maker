@@ -22,7 +22,7 @@ export default function loadTinymce (cb) {
 
   loadScript(tinymceUrl, () => {
     loading.close()
-    // eslint-disable-next-line no-undef
+    // @ts-ignore
     tinymceObj = tinymce
     cb(tinymceObj)
   })

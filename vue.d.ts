@@ -5,4 +5,6 @@ declare module '*.vue' {
 }
 
 declare module 'vue';
+declare module 'vue-router';
+declare module 'element-ui';
 declare module 'util';

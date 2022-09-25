@@ -3,13 +3,15 @@ import ELEMENT from 'element-ui'
 import pluginsConfig from './pluginsConfig'
 
 // monaco-editor单例
+// @ts-ignore
 let monacoEidtor
 
 /**
  * 动态加载monaco-editor cdn资源
  * @param {Function} cb 回调，必填
  */
-export default function loadMonaco (cb) {
+export default function loadMonaco (cb: any) {
+  // @ts-ignore
   if (monacoEidtor) {
     cb(monacoEidtor)
     return
@@ -25,13 +27,17 @@ export default function loadMonaco (cb) {
     spinner: 'el-icon-loading',
     background: 'rgba(255, 255, 255, 0.5)'
   })
+  // @ts-ignore
   !window.require && (window.require = {})
+  // @ts-ignore
   !window.require.paths && (window.require.paths = {})
+  // @ts-ignore
   window.require.paths.vs = vs
   loadScript(`${vs}/loader.js`, () => {
     // debugger
     window.require(['vs/editor/editor.main'], () => {
       loading.close()
+      // @ts-ignore
       monacoEidtor = window.monaco
       cb(monacoEidtor)
     })
