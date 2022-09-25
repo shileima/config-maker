@@ -1,5 +1,5 @@
 /* eslint-disable */
-tinymce.addI18n('zh_CN',{
+window.tinymce.addI18n('zh_CN',{
 "Redo": "\u91cd\u505a",
 "Undo": "\u64a4\u9500",
 "Cut": "\u526a\u5207",

@@ -22,7 +22,7 @@ export default function loadBeautifier (cb) {
   loadScript(beautifierUrl, () => {
     loading.close()
     // eslint-disable-next-line no-undef
-    beautifierObj = beautifier
+    beautifierObj = window.beautifier
     cb(beautifierObj)
   })
 }
