@@ -499,12 +499,12 @@ export const selectComponents = [
     __slot__: {
       'list-type': true
     },
-    action: 'https://jsonplaceholder.typicode.com/posts/',
+    action: 'https://yapi.sankuai.com/mock/28111/upload',
     disabled: false,
     accept: '',
     name: 'file',
     'auto-upload': true,
-    'list-type': 'text',
+    'list-type': 'picture-card',
     multiple: false
   }
 ]
