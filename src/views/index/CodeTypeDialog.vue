@@ -18,7 +18,7 @@
           label-width="100px"
         >
           <el-col :span="24">
-            <el-form-item label="生成类型" prop="type">
+            <!-- <el-form-item label="生成类型" prop="type">
               <el-radio-group v-model="formData.type">
                 <el-radio-button
                   v-for="(item, index) in typeOptions"
@@ -29,7 +29,7 @@
                   {{ item.label }}
                 </el-radio-button>
               </el-radio-group>
-            </el-form-item>
+            </el-form-item> -->
             <el-form-item v-if="showFileName" label="文件名" prop="fileName">
               <el-input v-model="formData.fileName" placeholder="请输入文件名" clearable />
             </el-form-item>
@@ -63,20 +63,20 @@ export default {
           required: true,
           message: '请输入文件名',
           trigger: 'blur'
-        }],
-        type: [{
-          required: true,
-          message: '生成类型不能为空',
-          trigger: 'change'
         }]
-      },
-      typeOptions: [{
-        label: '页面',
-        value: 'file'
-      }, {
-        label: '弹窗',
-        value: 'dialog'
-      }]
+        // type: [{
+        //   required: true,
+        //   message: '生成类型不能为空',
+        //   trigger: 'change'
+        // }]
+      }
+      // typeOptions: [{
+      //   label: '页面',
+      //   value: 'file'
+      // }, {
+      //   label: '弹窗',
+      //   value: 'dialog'
+      // }]
     }
   },
   computed: {

@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '@/views/index/Home.vue'
-import UploadImage from '@/views/example/decrator.vue'
+import { Demo } from '../lib/index'
 
 Vue.use(VueRouter)
 
@@ -14,7 +14,7 @@ const routes = [
   {
     path: '/page',
     name: 'page',
-    component: UploadImage
+    component: Demo
   },
   {
     path: '/parser',

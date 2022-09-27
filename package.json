@@ -5,6 +5,7 @@
   "scripts": {
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
+    "build:lib": "vue-cli-service build --target lib --name @sugou/sg-custom-props --dest ./build ./src/lib/index.ts --watch --mode local",
     "build:parser": "vue-cli-service build --target lib --name form-gen-parser --dest ./src/components/parser/lib/ ./src/components/parser/index.js",
     "build:render": "vue-cli-service build --target lib --name form-gen-render --dest ./src/components/render/lib/ ./src/components/render/render.js",
     "build:report": "vue-cli-service build --report",
