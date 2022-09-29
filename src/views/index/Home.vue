@@ -68,6 +68,9 @@
         <el-button type="text" @click="save">
           生成vue文件
         </el-button>
+        <el-button type="text" @click="preview">
+          本地预览
+        </el-button>
         <el-button
           class="copy-btn-main"
           icon="el-icon-document-copy"
@@ -76,12 +79,7 @@
         >
           复制代码
         </el-button>
-        <el-button
-          class="delete-btn"
-          icon="el-icon-delete"
-          type="text"
-          @click="empty"
-        >
+        <el-button class="delete-btn" icon="el-icon-delete" type="text" @click="empty">
           清空
         </el-button>
       </div>
@@ -254,7 +252,6 @@ export default {
       ]
     }
   },
-  computed: {},
   watch: {
     // eslint-disable-next-line func-names
     'activeData.__config__.label': function (val, oldVal) {
@@ -287,7 +284,7 @@ export default {
       immediate: true
     }
   },
-  mounted () {
+  async mounted () {
     if (Array.isArray(drawingListInDB) && drawingListInDB.length > 0) {
       this.drawingList = drawingListInDB
     } else {
@@ -314,8 +311,41 @@ export default {
     clipboard.on('error', e => {
       this.$message.error('代码复制失败')
     })
+    // 获取基础配置
+    await this.getBaseConfig()
   },
   methods: {
+    // 获取基础配置
+    async getBaseConfig () {
+      const url = '/api/gd/flex/baseConfig'
+      const res = await this.$axios({
+        method: 'post',
+        url
+      })
+      console.log('res 332-->', res)
+      const { code, data, msg } = res.data
+      if (code === 0) {
+        this.projectUrl = data.projectPath
+        this.$notify({
+          title: '成功',
+          message: msg,
+          type: 'success'
+        })
+      } else {
+        this.$notify({
+          title: '失败',
+          message: msg || '获取基础配置失败',
+          type: 'error'
+        })
+      }
+    },
+    // 打开预览页面
+    async preview () {
+      const routeUrl = this.$router.resolve({
+        path: '/page'
+      })
+      window.open(routeUrl.href, '_blank')
+    },
     setObjectValueReduce (obj, strKeys, data) {
       const arr = strKeys.split('.')
       arr.reduce((pre, item, i) => {
@@ -330,9 +360,7 @@ export default {
     setRespData (component, resp) {
       const { dataPath, renderKey, dataConsumer } = component.__config__
       if (!dataPath || !dataConsumer) return
-      const respData = dataPath
-        .split('.')
-        .reduce((pre, item) => pre[item], resp)
+      const respData = dataPath.split('.').reduce((pre, item) => pre[item], resp)
 
       // 将请求回来的数据，赋值到指定属性。
       // 以el-tabel为例，根据Element文档，应该将数据赋值给el-tabel的data属性，所以dataConsumer的值应为'data';
@@ -426,21 +454,37 @@ export default {
       const blob = new Blob([codeStr], { type: 'text/plain;charset=utf-8' })
       saveAs(blob, data.fileName)
     },
-    execSave (data) {
+    async execSave (data) {
       const codeStr = this.generateCode()
-      const file = new File([codeStr], { type: 'text/plain;charset=utf-8' })
-      saveAs(file, data.fileName)
+      const blob = new Blob([codeStr], { type: 'text/plain;charset=utf-8' })
+      const url = '/api/gd/flex/copyFile'
+      const res = await this.$axios({
+        method: 'post',
+        url,
+        data: {
+          from: '',
+          target: '/Users/shilei/gd/tools/config-maker/src/lib',
+          fileName: data.fileName,
+          file: codeStr
+        }
+      })
+      const { code, msg } = res.data
+      if (code === 0) {
+        this.$notify({
+          title: '成功',
+          message: msg,
+          type: 'success'
+        })
+      }
     },
     execCopy (data) {
       document.getElementById('copyNode').click()
     },
     empty () {
-      this.$confirm('确定要清空所有组件吗？', '提示', { type: 'warning' }).then(
-        () => {
-          this.drawingList = []
-          this.idGlobal = 100
-        }
-      )
+      this.$confirm('确定要清空所有组件吗？', '提示', { type: 'warning' }).then(() => {
+        this.drawingList = []
+        this.idGlobal = 100
+      })
     },
     drawingItemCopy (item, list) {
       let clone = deepClone(item)
@@ -463,10 +507,7 @@ export default {
       const script = vueScript(makeUpJs(this.formData, type))
       const html = vueTemplate(makeUpHtml(this.formData, type))
       const css = cssStyle(makeUpCss(this.formData))
-      const beautifuCode = beautifier.html(
-        html + script + css,
-        beautifierConf.html
-      )
+      const beautifuCode = beautifier.html(html + script + css, beautifierConf.html)
       return beautifuCode
     },
     showJson () {
@@ -505,8 +546,7 @@ export default {
       this.activeData.__config__.tagIcon = config.tagIcon
       this.activeData.__config__.document = config.document
       if (
-        typeof this.activeData?.__config__?.defaultValue
-        === typeof config.defaultValue
+        typeof this.activeData?.__config__?.defaultValue === typeof config.defaultValue
       ) {
         config.defaultValue = this.activeData.__config__.defaultValue
       }
@@ -519,9 +559,7 @@ export default {
       this.updateDrawingList(newTag, this.drawingList)
     },
     updateDrawingList (newTag, list) {
-      const index = list.findIndex(
-        item => item.__config__.formId === this.activeId
-      )
+      const index = list.findIndex(item => item.__config__.formId === this.activeId)
       if (index > -1) {
         list.splice(index, 1, newTag)
       } else {

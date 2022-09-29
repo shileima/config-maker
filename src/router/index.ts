@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '@/views/index/Home.vue'
-import { Demo } from '../lib/index'
+import RenderPage from '../RenderPage.vue'
 
 Vue.use(VueRouter)
 
@@ -12,9 +12,14 @@ const routes = [
     component: Home
   },
   {
+    path: '/page/:name',
+    name: 'page',
+    component: RenderPage
+  },
+  {
     path: '/page',
     name: 'page',
-    component: Demo
+    component: RenderPage
   },
   {
     path: '/parser',
